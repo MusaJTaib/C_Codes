@@ -1,0 +1,353 @@
+#include<stdio.h>
+#include<windows.h>
+#include<stdlib.h>
+#include<time.h>
+#define ROWS 35
+#define COLUMNS 85
+int Randomboi1(int x);
+int Randomboi2(int y);
+void SpaceshipPattern(char a[][COLUMNS]);
+void GliderPattern(char a[][COLUMNS]);
+void PulsarPattern(char a[][COLUMNS]);
+void beaconPattern(char a[][COLUMNS]);
+void blinkerPattern(char a[][COLUMNS]);
+void ToadPattern(char a[][COLUMNS]);
+void boatPattern(char a[][COLUMNS]);
+void initialisePattern(char a[][COLUMNS]);
+void printArray(char a[][COLUMNS]);
+int generationInput(void);
+void nextGeneration(char a[][COLUMNS]);
+char liveCell = '+';
+char deadCell = ' ';
+void main()
+{
+	char gol[ROWS][COLUMNS];
+	printf("Enter number 1 for blinker, 2 for boat pattern, 3 for toad pattern, 4 for beacon pattern, 5 for pulsar, 6 for glider and 7 for spaceship. Press 0 to quit the program: ");
+	int pattern;
+	scanf_s("%d", &pattern);
+	if (pattern == 0)
+		exit(0);
+	while (pattern > 7 || pattern < 1)
+	{
+		printf("\nYou have not entered a correct number. Enter the numbers again: ");
+		scanf_s("%d", &pattern);
+	}
+	if (pattern == 1)
+		blinkerPattern(gol);
+	if (pattern == 2)
+		boatPattern(gol);
+	if (pattern == 3)
+		ToadPattern(gol);
+	if (pattern == 4)
+		beaconPattern(gol);
+	if (pattern == 5)
+		PulsarPattern(gol);
+	if (pattern == 6)
+		GliderPattern(gol);
+	if (pattern == 7)
+		SpaceshipPattern(gol);
+	printArray(gol);
+	int generations = generationInput();
+
+	printf("\n\n\n\n");
+	for (int x = 1; x <= generations; x++)
+	{
+		system("cls");
+		nextGeneration(gol);
+		printArray(gol);
+		Sleep(5);
+	}
+
+	system("pause");
+}
+void blinkerPattern(char a[][COLUMNS])
+{
+	int r1 = 0, r2 = 0;
+	r1 = Randomboi1(r1);
+	r2 = Randomboi2(r2);
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == r1 && j == r2) || (i == r1 && j == r2 + 1) || (i == r1 && j == r2 + 2))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void beaconPattern(char a[][COLUMNS])
+{
+	int r1 = 0, r2 = 0;
+	r1 = Randomboi1(r1);
+	r2 = Randomboi2(r2);
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == r1 && j == r2) || (i == r1 && j == r2 + 1) || (i == r1 + 1 && j == r2) || (i == r1 + 3 && j == r2 + 2) || (i == r1 + 3 && j == r2 + 3) || (i == r1 + 2 && j == r2 + 3))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void boatPattern(char a[][COLUMNS])
+{
+	char liveCell = '+';
+	char deadCell = ' ';
+
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == 17 && j == 35) || (i == 17 && j == 36) || (i == 18 && j == 35) || (i == 19 && j == 36) || (i == 18 && j == 37))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void SpaceshipPattern(char a[][COLUMNS])
+{
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == 32 && j == 82) || (i == 32 && j == 81) || (i == 32 && j == 80) || (i == 32 && j == 79) || (i == 31 && j == 82) || (i == 30 && j == 82) || (i == 29 && j == 81) || (i == 31 && j == 78))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void GliderPattern(char a[][COLUMNS])
+{
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == 32 && j == 82) || (i == 32 && j == 81) || (i == 32 && j == 80) || (i == 31 && j == 82) || (i == 30 && j == 81))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void ToadPattern(char a[][COLUMNS])
+{
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == 17 && j == 37) || (i == 17 && j == 36) || (i == 18 && j == 35) || (i == 18 && j == 36) || (i == 18 && j == 37) || (i == 17 && j == 38))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void PulsarPattern(char a[][COLUMNS])
+{
+	for (int i = 0; i <ROWS; i++)
+	{
+		for (int j = 0; j <COLUMNS; j++)
+		{
+			if ((i == 10 && j == 32) || (i == 11 && j == 32) || (i == 12 && j == 32) || (i == 12 && j == 33) || (i == 10 && j == 38) || (i == 11 && j == 38) || (i == 12 && j == 38) || (i == 12 && j == 37))
+			{
+				a[i][j] = liveCell;
+			}
+			else if((i == 15 && j == 30) || (i == 15 && j == 32) || (i == 15 && j == 34) || (i == 15 && j == 36) || (i == 15 && j == 38) || (i == 15 && j == 40) || (i == 19 && j == 30) || (i == 19 && j == 32) || (i == 19 && j == 34) || (i == 19 && j == 36) || (i == 19 && j == 38) || (i == 19 && j == 40))
+			{
+				a[i][j] = liveCell;
+			}
+			else if((i == 14 && j == 28) || (i == 14 && j == 29) || (i == 14 && j == 30) || (i == 14 && j == 33) || (i == 14 && j == 34) || (i == 14 && j == 36) || (i == 14 && j == 37) || (i == 14 && j == 40) || (i == 14 && j == 41) || (i == 14 && j == 42) || (i == 20 && j == 28) || (i == 20 && j == 29) || (i == 20 && j == 30) || (i == 20 && j == 33) || (i == 20 && j == 34) || (i == 20 && j == 36) || (i == 20 && j == 37) || (i == 20 && j == 40) || (i == 20 && j == 41) || (i == 20 && j == 42))
+			{
+				a[i][j] = liveCell;
+			}
+			else if((i == 16 && j == 32) || (i == 16 && j == 33) || (i == 16 && j == 37) || (i == 16 && j == 38) || (i == 18 && j == 32) || (i == 18 && j == 33) || (i == 18 && j == 37) || (i == 18 && j == 38))
+			{
+				a[i][j] = liveCell;
+			}
+			else if((i == 24 && j == 32) || (i == 23 && j == 32) || (i == 22 && j == 32) || (i == 22 && j == 33) || (i == 24 && j == 38) || (i == 23 && j == 38) || (i == 22 && j == 38) || (i == 22 && j == 37))
+			{
+				a[i][j] = liveCell;
+			}
+			else
+			{
+				a[i][j] = deadCell;
+			}
+		}
+	}
+}
+void printArray(char a[][COLUMNS])
+{
+	char vboundary = '|';
+	char hboundary = '-';
+	for (int i = -1; i <= ROWS; i++)
+	{
+		puts("");
+		printf("\t");
+		for (int j = -1; j <= COLUMNS; j++)
+		{
+
+			if (j == -1 || j == COLUMNS)
+			{
+				printf("%c", vboundary);
+			}
+			else if((i == -1 || i == ROWS) && (j != -1 || j != COLUMNS))
+			{
+				printf("%c", hboundary);
+			}
+			else
+			{
+				printf("%c", a[i][j]);
+			}
+
+		}
+
+	}
+	puts("");
+	printf("\t");
+}
+int generationInput(void)
+{
+	int generations;
+	printf("Enter the number of times, or number of generations you want this code to run: ");
+	scanf_s("%d", &generations);
+	return generations;
+}
+void nextGeneration(char a[][COLUMNS])
+{
+	char initiallyalive = 'a';
+	for (int j = 0; j <ROWS; j++)
+	{
+		for (int i = 0; i <COLUMNS; i++)
+		{
+			int num1 = i - 1;
+			int num2 = i + 1;
+			int num3 = j - 1;
+			int num4 = j + 1;
+			if (i == 0)
+			{
+				num1 = 84;
+			}
+			if (i == 84)
+			{
+				num2 = 0;
+			}
+			if (j == 0)
+			{
+				num3 = 34;
+			}
+			if (j == 34)
+			{
+				num4 = 0;
+			}
+
+			int neighbours = 0;
+			if ((a[j][num2] == liveCell) || (a[j][num2] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[j][num1] == liveCell) || (a[j][num1] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num4][i] == liveCell) || (a[num4][i] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num3][i] == liveCell) || (a[num3][i] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num4][num2] == liveCell) || (a[num4][num2] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num4][num1] == liveCell) || (a[num4][num1] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num3][num1] == liveCell) || (a[num3][num1] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((a[num3][num2] == liveCell) || (a[num3][num2] == initiallyalive))
+			{
+				neighbours++;
+			}
+			if ((neighbours == 2 && a[j][i] == liveCell) || ((neighbours == 3) && (a[j][i] == liveCell)))
+			{
+				a[j][i] = liveCell;
+			}
+			else if((neighbours == 3) && (a[j][i] == deadCell))
+			{
+				a[j][i] = '/';
+			}
+			else
+			{
+				if (a[j][i] == liveCell)
+				{
+					a[j][i] = initiallyalive;
+				}
+				else
+				{
+					a[j][i] = deadCell;
+				}
+
+			}
+		}
+	}
+	for (int j = 0; j <ROWS; j++)
+	{
+		for (int i = 0; i <COLUMNS; i++)
+		{
+			if (a[j][i] == '/')
+			{
+				a[j][i] = liveCell;
+			}
+			else if(a[j][i] == initiallyalive)
+			{
+				a[j][i] = deadCell;
+			}
+		}
+	}
+}
+int Randomboi1(int x)
+{
+	srand(time(NULL));
+	x = rand() % 34;
+	return x;
+}
+int Randomboi2(int y)
+{
+	srand(time(NULL));
+	y = rand() % 84;
+	return y;
+}
